@@ -15,7 +15,6 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 app.set("view engine", "ejs")
 
-
 app.use("/owner", ownersRouter)
 app.use("/product", productsRouter)
 app.use("/user", usersRouter)

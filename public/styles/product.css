@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+ 
+}
+
+body {
+  background: gray;
+  padding: 10px;
+   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container layout for mobile */
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top Bar */
+
+
+.topbar nav {
+  margin-top: 10px;
+}
+
+.topbar nav a {
+  text-decoration: none;
+  color: black;
+  margin: 0 10px;
+  font-size: 14px;
+}
+
+
+
+/* Content Area */
+.content {
+  padding: 10px;
+  background: gray;
+  color: white;
+  width: 400px;
+}
+
+h1 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.form-section {
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Input Fields */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.upload-btn {
+  background: blue;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Price Section */
+.price-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.button{
+  background-color: rgb(32, 44, 255);
+  color: white;
+  font-size: large;
+}
+.button:hover{
+  background-color: rgb(0, 9, 175);
+
+}
+/* Responsive Design */
+@media (min-width: 768px) {
+  .container {
+      flex-direction: row;
+  }
+
+  .sidebar {
+      width: 250px;
+      text-align: left;
+  }
+
+  .content {
+      flex: 1;
+  }
+}
