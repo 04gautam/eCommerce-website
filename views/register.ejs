@@ -4,54 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>
-    body{
-      background-color: gray;
-      color: white;
-    }
-    div{
-      border: 2px solid white;
-      width: 300px;
-      margin-bottom: 20px;
-      padding: 10px;
-      text-align: center;
-    }
-    input{
-      width: 200px;
-      height: 30px;
-      border-radius: 10px;
-      outline: none;
-      border: none;
-      margin-bottom: 10px;
-      padding-left: 10px;
-    }
-
-    button{
-      background-color: rgb(31, 31, 175);
-      padding: 10px;
-      color: white;
-      font-size: larger;
-      border-radius: 10px;
-      border: none;
-      text-align: center;
-    }
-  </style>
+  <link rel="stylesheet" href="/styles/login-register.css">
+ 
   
 </head>
 <body>
-  <div>
+  <div class="parent">
+
+  
+  <div class="login-register">
     <h1>Register here</h1>
   <form action="/user/register" method="post">
 
     <input type="text" name="username" placeholder="Enter username" required> <br>
     <input type="text" name="email" placeholder="E-mail" required> <br>
     <input type="password" name="password", placeholder="Password" required><br>
-    <button>Submit</button>
+
+    <div class="myButton">
+      <button>Submit</button>
+    </div>
   </form>
 
     </div>
 
-  <div>
+  <div class="login-register">
     <h1>Login here</h1>
   <form action="/user/login" method="post">
 
@@ -61,11 +37,14 @@ required> <br>
     <input type="password" name="password", placeholder="Password" required
 required
 required><br>
-    <button>Submit</button>
+<div class="myButton">
+
+  <button>Submit</button>
+</div>
   </form>
 
     </div>
 
-
+</div>
 </body>
 </html>

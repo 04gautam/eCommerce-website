@@ -14,10 +14,10 @@
 
   <%allProduct.forEach((ele)=>{%>
     
-  <div class="bg-white rounded-lg shadow-lg overflow-hidden w-60 hover:shadow-xl transition-shadow duration-300">
+  <div class="bg-white rounded-lg shadow-lg overflow-hidden w-60 hover:shadow-xl transition-shadow duration-300 m-2">
     <!-- Product Image -->
     <img 
-      src="https://via.placeholder.com/300" 
+      src="data:image/jpeg;base64,<%= ele.image.toString('base64') %>" 
       alt="Product Image" 
       class="w-full h-48 object-cover"
     >

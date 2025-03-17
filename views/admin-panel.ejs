@@ -11,24 +11,25 @@
 
 
         <main class="content">
-          <form action="/owner/proinfo" method="post">
+          <form action="/owner/proinfo" method="post" enctype="multipart/form-data">
 
        
             <h1>Create New Product</h1>
           
+              <input type="file" name="image">
              
-                <input type="text" placeholder="Product" name="name">
+                <input type="text" placeholder="Product" name="name" required>
                 <div class="price-section">
-                    <input type="text" placeholder="Product Price" name="price">
-                    <input type="text" placeholder="Discount Price" name="discount">
+                    <input type="text" placeholder="Product Price" name="price" required>
+                    <input type="text" placeholder="Discount Price" name="discount" required>
                 </div>
             </div>
-
+<br>
             <div class="form-section">
                 <h2>Panel Details</h2>
-                <input type="text" placeholder="Background Color" name="bgcolor">
-                <input type="text" placeholder="Panel Color" name="panelcolor">
-                <input type="text" placeholder="Text Color" name="textcolor">
+                <input type="text" placeholder="Background Color" name="bgcolor" required>
+                <input type="text" placeholder="Panel Color" name="panelcolor" required>
+                <input type="text" placeholder="Text Color" name="textcolor" required>
             </div>
 
             <input class="button" type="submit" value="Submit">

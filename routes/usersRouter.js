@@ -35,7 +35,8 @@ router.post("/login", protect,(req, res)=>{
   try{
 
     res.cookie("token", "hello")
-    // console.log(req.body)
+    console.log("Yes this is running before req.userData:")
+    // console.log(req.userData)
     res.redirect("/product/ecom")
 
   }
