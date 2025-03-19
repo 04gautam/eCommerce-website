@@ -20,7 +20,7 @@ app.set("view engine", "ejs")
 
 app.use("/owner", ownersRouter)
 app.use("/product", productsRouter)
-app.use("/user", usersRouter)
+app.use("/", usersRouter)
 app.use("/", indexRouter)
 
 

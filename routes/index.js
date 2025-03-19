@@ -4,6 +4,7 @@ const cookieProtect = require("../middlewares/cookie-protect")
 const findUser = require("../middlewares/find-user")
 const userModel = require("../models/user-model")
 const router = express.Router()
+const productModel = require("../models/product-model")
 
 router.get("/cart/:productId",cookieProtect, async (req, res)=>{
   try{
@@ -26,5 +27,19 @@ router.get('/cart', async (req, res)=>{
 // console.log(cartUser)
   res.render("cart.ejs", {cartUser: cartUser})
 }) 
+
+router.get("/shop", cookieProtect, async (req, res)=>{
+  try {
+
+    const allProduct = await productModel.find()
+    
+
+    res.render("shop.ejs", {allProduct: allProduct})
+    
+  } catch (error) {
+    console.log(error.message)
+  }
+})
+
 
 module.exports = router;

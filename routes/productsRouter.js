@@ -13,18 +13,6 @@ router.get("/ecom", cookieProtect,(req, res)=>{
   }
 })
 
-router.get("/shop", cookieProtect, async (req, res)=>{
-  try {
-
-    const allProduct = await productModel.find()
-    
-
-    res.render("shop.ejs", {allProduct: allProduct})
-    
-  } catch (error) {
-    console.log(error.message)
-  }
-})
 
 
 module.exports = router;

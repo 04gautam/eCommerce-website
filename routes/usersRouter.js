@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require("mongoose")
 const userModel = require("../models/user-model")
 const protect = require("../middlewares/find-user")
+const jwt = require("jsonwebtoken")
 
 router.get("/", (req, res)=>{
   try {
@@ -34,10 +35,17 @@ await createUser.save()
 router.post("/login", protect,(req, res)=>{
   try{
 
-    res.cookie("token", "hello")
-    console.log("Yes this is running before req.userData:")
-    // console.log(req.userData)
-    res.redirect("/product/shop")
+    // console.log(req.userData.email)
+
+    // res.cookie("token", "hello")
+    let token = jwt.sign({secret:"hello"}, process.env.JWT_KEY);
+    // console.log(token)
+
+    res.cookie("token", token)
+    
+  
+
+    res.redirect("/shop")
 
   }
   catch(error){
