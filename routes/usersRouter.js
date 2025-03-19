@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 const userModel = require("../models/user-model")
 const protect = require("../middlewares/find-user")
 
-router.get("/register", (req, res)=>{
+router.get("/", (req, res)=>{
   try {
     res.render("register.ejs")
     
@@ -37,7 +37,7 @@ router.post("/login", protect,(req, res)=>{
     res.cookie("token", "hello")
     console.log("Yes this is running before req.userData:")
     // console.log(req.userData)
-    res.redirect("/product/ecom")
+    res.redirect("/product/shop")
 
   }
   catch(error){

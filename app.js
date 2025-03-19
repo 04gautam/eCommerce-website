@@ -8,6 +8,7 @@ const path = require("path")
 const ownersRouter = require("./routes/ownersRouter")
 const productsRouter = require("./routes/productsRouter")
 const usersRouter = require("./routes/usersRouter")
+const indexRouter = require("./routes/index")
 const multer = require("multer")
 
 
@@ -20,5 +21,8 @@ app.set("view engine", "ejs")
 app.use("/owner", ownersRouter)
 app.use("/product", productsRouter)
 app.use("/user", usersRouter)
+app.use("/", indexRouter)
+
+
 
 app.listen(3000, ()=>console.log("Server is connected on 3000 port"))

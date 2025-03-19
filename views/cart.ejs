@@ -11,14 +11,12 @@
 <body class="bg-gray-100 flex flex-col sm:flex-row items-center justify-center min-h-screen">
 
   <!-- Product Card -->
-   <a href="/cart">Cart</a>
-
-  <%allProduct.forEach((ele)=>{%>
+   <a href="product/shop">Shop</a>
     
   <div class="bg-white rounded-lg shadow-lg overflow-hidden w-60 hover:shadow-xl transition-shadow duration-300 m-2">
     <!-- Product Image -->
     <img 
-      src="data:image/jpeg;base64,<%= ele.image.toString('base64') %>" 
+      src="data:image/jpeg;base64,<%= cartUser.cart[0].image.toString('base64') %>" 
       alt="Product Image" 
       class="w-full h-48 object-cover"
     >
@@ -26,7 +24,7 @@
     <!-- Product Details -->
     <div class="p-4">
       <!-- Product Name -->
-      <h2 class="text-xl font-bold text-gray-800 mb-2"><%=ele.name%></h2>
+      <h2 class="text-xl font-bold text-gray-800 mb-2"><%=cartUser.cart[0].name%></h2>
 
       <!-- Product Description -->
       <p class="text-gray-600 text-sm mb-4">
@@ -35,16 +33,13 @@
 
       <!-- Price -->
       <div class="flex items-center justify-between">
-        <span class="text-lg font-bold text-gray-800">&#x20b9 <%=ele.price%> </span>
+        <span class="text-lg font-bold text-gray-800">&#x20b9 <%=cartUser.cart[0].price%> </span>
 
-        <!-- Add to Cart Button -->
-        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-300">
-          <a href="/cart/<%=ele._id%>">Add to Cart</a>
-        </button>
+       
       </div>
     </div>
   </div>
-  <%})%>
+
 
 
 

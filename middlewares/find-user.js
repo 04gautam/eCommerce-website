@@ -7,7 +7,7 @@ try {
   if(!findUser){
   return res.send("no User found register first")
   }
-  req.userData = findUser
+  // req.userData = findUser
   // console.log(finduser)
   next()
 } catch (error) {
