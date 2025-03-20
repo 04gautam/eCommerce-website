@@ -13,7 +13,7 @@ cart: [{
   ref: "product",
  
 }],
-isadmin: Boolean,
+
 orders: {
   type: Array,
   default: [],

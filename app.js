@@ -9,6 +9,7 @@ const ownersRouter = require("./routes/ownersRouter")
 const productsRouter = require("./routes/productsRouter")
 const usersRouter = require("./routes/usersRouter")
 const indexRouter = require("./routes/index")
+const session = require("express-session")
 const multer = require("multer")
 
 
@@ -17,6 +18,13 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 app.set("view engine", "ejs")
+  // Set up session middleware
+  app.use(session({
+    secret: 'secret_key', // replace with your own secret
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // set to true if using HTTPS
+}));
 
 app.use("/owner", ownersRouter)
 app.use("/product", productsRouter)

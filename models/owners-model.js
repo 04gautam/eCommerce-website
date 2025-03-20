@@ -8,12 +8,8 @@ fullname:{
 },
 email:String,
 passwor: String,
-cart: {
-  type: Array,
-  default: [],
-},
 picture: String,
-gstin: String,
+
 })
 
 module.exports = mongoose.model("owner", ownerSchema)

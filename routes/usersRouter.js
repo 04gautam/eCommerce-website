@@ -7,7 +7,9 @@ const jwt = require("jsonwebtoken")
 
 router.get("/", (req, res)=>{
   try {
-    res.render("register.ejs")
+    const message = req.session.message;
+    
+    res.render("register.ejs", {message})
     
   } catch (error) {
     console.log(error.message)
