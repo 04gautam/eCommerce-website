@@ -1,6 +1,6 @@
 const mongoose =  require("mongoose")
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
 username:{
   type: String,
   minLength: 3,
@@ -15,7 +15,7 @@ cart: [{
 }],
 
 orders: {
-  type: Array,
+  type: Array ,
   default: [],
 },
 contact: Number,
