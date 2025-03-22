@@ -9,6 +9,22 @@ const jwt = require("jsonwebtoken")
 const { default: mongoose } = require("mongoose")
 
 
+router.get("/shop", cookieProtect, async (req, res)=>{
+  try {
+
+    const allProduct = await productModel.find()
+    
+    const cartMsg = req.session.message;
+    delete req.session.message;
+
+    res.render("shop.ejs", {allProduct: allProduct, cartMsg})
+    
+  } catch (error) {
+    console.log(error.message)
+  }
+})
+
+
 
 router.get("/cart/:productId",cookieProtect, async (req, res)=>{
   try{
@@ -19,10 +35,11 @@ router.get("/cart/:productId",cookieProtect, async (req, res)=>{
     let decodedEmail = jwt.verify(token, process.env.JWT_KEY);
    
   let cartUser = await userModel.findOne({email:decodedEmail})
+
     cartUser.cart.push(req.params.productId)
     // console.log(req.params.productId)
    await cartUser.save()
-  //  req.flash("success", "Added to cart")
+  
     req.session.message = '1 item added in cart';
     res.redirect("/shop")
 
@@ -43,6 +60,7 @@ try {
   .populate("cart")
 // console.log(cartUser.cart)
 // res.send("done")
+
   res.render("cart.ejs", {cartUser: cartUser.cart})
 
 } catch (error) {
@@ -51,21 +69,6 @@ try {
 
 }) 
 
-
-
-router.get("/shop", cookieProtect, async (req, res)=>{
-  try {
-
-    const allProduct = await productModel.find()
-    
-    const cartMsg = req.session.message;
-    delete req.session.message;
-    res.render("shop.ejs", {allProduct: allProduct, cartMsg})
-    
-  } catch (error) {
-    console.log(error.message)
-  }
-})
 
 //this is logout rout
 
@@ -90,7 +93,7 @@ router.get("/logout",cookieProtect, async (req, res)=>{
 router.get("/buy/:itemId", cookieProtect,(req, res)=>{
   try {
       // console.log(req.params.itemId)
-      res.send("done")
+      res.render("buy.ejs")
   } catch (error) {
     res.send(error.message)
   }

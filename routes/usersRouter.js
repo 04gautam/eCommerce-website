@@ -27,7 +27,7 @@ router.post("/register", async (req, res)=>{
     })
     
 await createUser.save()
-    res.send("created")
+    res.redirect("/")
   } catch (error) {
     res.send(error.message)
   }
