@@ -51,9 +51,11 @@
           </p> -->
 
           <!-- Price and Button -->
-          <div class="flex items-center justify-between mt-4">
+           <div class="flex items-center mt-4 justify-between">
+          <div>
             <span class="text-xl font-bold text-indigo-600">&#x20b9; <%= ele.price %></span>
-
+            <span class="text-xl ml-2 text-red-600"><%= ele.discount%>% off</span>
+           </div>
             <!-- Add to Cart Button -->
             <a href="/cart/<%= ele._id %>" 
               class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
@@ -61,7 +63,11 @@
             </a>
            
             </a>
-          </div>
+    
+
+
+           </div> 
+           
         </div>
       </div>
       <% }) %>

@@ -1,41 +1,32 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="/styles/product.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-   
-
-
-        <main class="content">
-          <form action="/owner/proinfo" method="post" enctype="multipart/form-data">
-
-       
-            <h1>Create New Product</h1>
-          
-              <input type="file" name="image">
-             
-                <input type="text" placeholder="Product" name="name" required>
-                <div class="price-section">
-                    <input type="text" placeholder="Product Price" name="price" required>
-                    <input type="text" placeholder="Discount Price" name="discount" required>
-                </div>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <main class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Create New Product</h1>
+        <form action="/product/proinfo" method="post" enctype="multipart/form-data" class="space-y-4">
+            <input type="file" name="image" class="w-full p-2 border border-gray-300 rounded-lg">
+            
+            <input type="text" placeholder="Product" name="name" required 
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            
+            <textarea name="discription" placeholder="Enter Product Info." required
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" placeholder="Product Price" name="price" required 
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                
+                <input type="text" placeholder="Discount Price" name="discount" required 
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
             </div>
-<br>
-            <div class="form-section">
-                <h2>Panel Details</h2>
-                <input type="text" placeholder="Background Color" name="bgcolor" required>
-                <input type="text" placeholder="Panel Color" name="panelcolor" required>
-                <input type="text" placeholder="Text Color" name="textcolor" required>
-            </div>
-
-            <input class="button" type="submit" value="Submit">
-            </form>
-
-        </main>
-
+            
+            <button type="submit" class="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-3 rounded-lg text-lg font-semibold hover:from-indigo-600 hover:to-purple-600 transition">Submit</button>
+        </form>
+    </main>
 </body>
 </html>

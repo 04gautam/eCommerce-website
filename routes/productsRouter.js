@@ -7,7 +7,7 @@ const upload = require("../config/multer-config")
 
 router.post("/proinfo", upload.single("image"), async (req, res)=>{
   try {
-   const {name, price, discount, bgcolor ,panelcolor,textcolor} = (req.body)
+   const {name, price, discount, bgcolor ,panelcolor,textcolor, discription} = (req.body)
 
    const makeProduct = new productModel({
       image: req.file.buffer,
@@ -16,11 +16,13 @@ router.post("/proinfo", upload.single("image"), async (req, res)=>{
       discount,
       bgcolor,
       panelcolor,
-      textcolor
+      textcolor,
+      discription
+
    })
    await makeProduct.save()
 
-   res.redirect("/product/shop")
+   res.redirect("/shop")
 
   // to Check only
 
