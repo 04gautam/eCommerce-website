@@ -125,4 +125,35 @@ router.get("/delete/:deleteId", cookieProtect, async(req, res)=>{
 
 })
 
+router.get("/hello",async (req, res)=>{
+
+  let findItems = req.query.filterItem;
+  
+// let findItems = await productModel.find({name:"White bag"});
+// let findItems = "Whitebag";
+
+
+// Split query into words
+const keywords = findItems.trim().split(/\s+/);
+
+  // Create regex filters for each word (case-insensitive)
+  const regexFilters = keywords.map((word) => ({
+    name: { $regex: word, $options: 'i' }
+  }));
+
+try{
+
+
+  // Use $or to match any of the words
+      const products = await productModel.find({ $or: regexFilters });
+  
+  // console.log(products)
+  res.render('filter-items.ejs', {products})
+}
+catch(err){
+  res.status(500).json({error:"Search faild"})
+}
+
+})
+
 module.exports = router;

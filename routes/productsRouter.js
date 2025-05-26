@@ -45,6 +45,4 @@ router.get("/ecom", cookieProtect,(req, res)=>{
   }
 })
 
-
-
 module.exports = router;
