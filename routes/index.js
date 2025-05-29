@@ -156,4 +156,99 @@ catch(err){
 
 })
 
+router.get("/send/mail", cookieProtect,(req, res)=>{
+
+  const {shipName, shipEmail, shipPhone, item, price, shipInfo} = req.query
+ 
+  // console.log(shipName, shipEmail, shipPhone, item, price, shipInfo)
+
+    const nodemailer = require("nodemailer");
+
+// Create a transporter
+const transporter = nodemailer.createTransport({
+  service: "gmail", // You can use 'hotmail', 'yahoo', or custom SMTP too
+  auth: {
+    user: "sunm13398@gmail.com", // Your Gmail address
+    pass: "buptobsfyqyjfvil",     // Use app password, not your Gmail password
+  },
+});
+
+// Email options
+const mailOptions = {
+  from: "sunm13398@gmail.com",
+  to: shipEmail,
+  subject: "A customer purchase something",
+  text: "Hello customer",
+ 
+  html: ` <div style="border: 2px solid #4a4a4a; border-radius: 8px; padding: 20px; font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f9f9f9;">
+    <div style="text-align: center; margin-bottom: 20px;">
+        <h2 style="color: #2c3e50; margin: 0;">STARK ORDER CONFIRMATION</h2>
+        <div style="height: 3px; background: linear-gradient(to right, #3498db, #2ecc71); margin: 10px 0;"></div>
+    </div>
+    
+    <div style="background-color: white; border-radius: 6px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+            <span style="font-weight: bold; color: #7f8c8d;">Customer:</span>
+            <span style="color: #2c3e50;">  ${shipName}</span>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+            <span style="font-weight: bold; color: #7f8c8d;">Email:</span>
+            <span style="color: #2c3e50;">  ${shipEmail}</span>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+            <span style="font-weight: bold; color: #7f8c8d;">Phone:</span>
+            <span style="color: #2c3e50;">  ${shipPhone}</span>
+        </div>
+        
+        <div style="height: 1px; background-color: #ecf0f1; margin: 15px 0;"></div>
+        
+        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+            <span style="font-weight: bold; color: #7f8c8d;">Item:</span>
+            <span style="color: #2c3e50; font-weight: bold;"> ${item}</span>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+            <span style="font-weight: bold; color: #7f8c8d;">Price:</span>
+            <span style="color: #27ae60; font-weight: bold;"> ${price}</span>
+        </div>
+    </div>
+    
+    <div style="background-color: #fff8e1; border-left: 4px solid #ffc107; padding: 12px; margin-top: 20px; border-radius: 0 4px 4px 0;">
+        <h4 style="color: #ff9800; margin: 0 0 5px 0;">Special Request:</h4>
+        <p style="color: #5d4037; margin: 0; font-style: italic;">  "${shipInfo}"</p>
+    </div>
+    
+    <div style="text-align: center; margin-top: 25px; color: #7f8c8d; font-size: 12px;">
+        <p>Thank you for your order! We'll process it shortly.</p>
+        <p>Need help? Contact us at support@stark.com</p>
+    </div>
+</div>
+  `,
+  
+
+};
+
+// Send the email
+transporter.sendMail(mailOptions, (error, info) => {
+  if (error) {
+    return console.log("Error:", error);
+  }
+  console.log("Email sent:", info.response);
+});
+
+
+// res.render("purchaseMsg.ejs")
+res.send("done")
+
+
+})
+
+router.get("/email/:em", cookieProtect, async(req, res)=>{
+  let shipItem = await productModel.findOne({_id:req.params.em})
+
+  res.render("email-both-end.ejs", {shipItem})
+})
+
 module.exports = router;
