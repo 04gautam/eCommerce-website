@@ -17,7 +17,17 @@ router.get("/shop", cookieProtect, async (req, res)=>{
     const cartMsg = req.session.message;
     delete req.session.message;
 
-    res.render("shop.ejs", {allProduct: allProduct, cartMsg})
+
+  const {token} = req.cookies;
+
+  let decodedEmail = jwt.verify(token, process.env.JWT_KEY);
+ 
+
+  let cartUser = await userModel.findOne({email:decodedEmail})
+  .populate("cart")
+
+
+    res.render("shop.ejs", {allProduct: allProduct, cartMsg, cartLen:cartUser.cart.length})
     
   } catch (error) {
     console.log(error.message)
@@ -51,17 +61,17 @@ router.get("/cart/:productId",cookieProtect, async (req, res)=>{
 router.get('/cart',cookieProtect, async (req, res)=>{
 try {
 
-  const {token} = req.cookies
+  const {token} = req.cookies;
 
   let decodedEmail = jwt.verify(token, process.env.JWT_KEY);
  
 
   let cartUser = await userModel.findOne({email:decodedEmail})
   .populate("cart")
-// console.log(cartUser.cart)
+// console.log(cartUser.cart.length)
 // res.send("done")
 
-  res.render("cart.ejs", {cartUser: cartUser.cart})
+  res.render("cart.ejs", {cartUser: cartUser.cart,cartLen:cartUser.cart.length})
 
 } catch (error) {
   res.send(error)
@@ -125,7 +135,7 @@ router.get("/delete/:deleteId", cookieProtect, async(req, res)=>{
 
 })
 
-router.get("/hello",async (req, res)=>{
+router.get("/filter",cookieProtect,async (req, res)=>{
 
   let findItems = req.query.filterItem;
   
@@ -148,7 +158,16 @@ try{
       const products = await productModel.find({ $or: regexFilters });
   
   // console.log(products)
-  res.render('filter-items.ejs', {products})
+
+
+  const {token} = req.cookies;
+
+  let decodedEmail = jwt.verify(token, process.env.JWT_KEY);
+ 
+
+  let cartUser = await userModel.findOne({email:decodedEmail})
+  .populate("cart")
+  res.render('filter-items.ejs', {products, cartLen:cartUser.cart.length})
 }
 catch(err){
   res.status(500).json({error:"Search faild"})
@@ -158,7 +177,7 @@ catch(err){
 
 router.get("/send/mail", cookieProtect,(req, res)=>{
 
-  const {shipName, shipEmail, shipPhone, item, price, shipInfo} = req.query
+  const {shipName, shipEmail, shipPhone, item, price, shipInfo, productId} = req.query
  
   // console.log(shipName, shipEmail, shipPhone, item, price, shipInfo)
 
@@ -177,7 +196,7 @@ const transporter = nodemailer.createTransport({
 const mailOptions = {
   from: "sunm13398@gmail.com",
   to: shipEmail,
-  subject: "A customer purchase something",
+  subject: "STARK Technologies",
   text: "Hello customer",
  
   html: ` <div style="border: 2px solid #4a4a4a; border-radius: 8px; padding: 20px; font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f9f9f9;">
@@ -213,6 +232,11 @@ const mailOptions = {
             <span style="font-weight: bold; color: #7f8c8d;">Price:</span>
             <span style="color: #27ae60; font-weight: bold;"> ${price}</span>
         </div>
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+            <span style="font-weight: bold; color: #7f8c8d;">ProductID:</span>
+            <span style="color: #27ae60; font-weight: bold;"> ${productId}</span>
+        </div>
     </div>
     
     <div style="background-color: #fff8e1; border-left: 4px solid #ffc107; padding: 12px; margin-top: 20px; border-radius: 0 4px 4px 0;">
@@ -239,16 +263,22 @@ transporter.sendMail(mailOptions, (error, info) => {
 });
 
 
-// res.render("purchaseMsg.ejs")
-res.send("done")
+res.redirect("/purchased")
 
 
+
+})
+
+router.get("/purchased", (req, res)=>{
+  res.render("purchaseMsg.ejs")
 })
 
 router.get("/email/:em", cookieProtect, async(req, res)=>{
   let shipItem = await productModel.findOne({_id:req.params.em})
+  // console.log(shipItem)
 
   res.render("email-both-end.ejs", {shipItem})
 })
+
 
 module.exports = router;
