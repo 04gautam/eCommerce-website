@@ -27,7 +27,7 @@ app.set("view engine", "ejs")
 }));
 
 app.use("/owner", ownersRouter)
-app.use("/product", productsRouter)
+app.use("/admin", productsRouter)
 app.use("/", usersRouter)
 app.use("/", indexRouter)
 

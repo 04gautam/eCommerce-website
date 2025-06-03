@@ -68,7 +68,8 @@ try {
 
   let cartUser = await userModel.findOne({email:decodedEmail})
   .populate("cart")
-// console.log(cartUser.cart.length)
+  
+// console.log(cartUser)
 // res.send("done")
 
   res.render("cart.ejs", {cartUser: cartUser.cart,cartLen:cartUser.cart.length})
@@ -160,6 +161,7 @@ try{
   // console.log(products)
 
 
+  //for cart item count
   const {token} = req.cookies;
 
   let decodedEmail = jwt.verify(token, process.env.JWT_KEY);
@@ -278,6 +280,15 @@ router.get("/email/:em", cookieProtect, async(req, res)=>{
   // console.log(shipItem)
 
   res.render("email-both-end.ejs", {shipItem})
+})
+
+
+
+router.get("/user/account",cookieProtect, async(req, res)=>{
+     
+    const userAccountInfo = jwt.verify(req.cookies.token, process.env.JWT_KEY)
+      // console.log(decoded)
+  res.render("userAccount.ejs", {userAccountInfo})
 })
 
 

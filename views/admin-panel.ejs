@@ -4,11 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link href="..src/output.css" rel="stylesheet"> -->
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+
+  <header class="fixed top-0 left-0 right-0 bg-gray-800 shadow-md py-4 z-50">
+    <div class="container mx-auto flex justify-between items-center pl-4 pr-2">
+      <!-- Logo -->
+      <a href="#" class="text-2xl border-b border-white font-bold text-white">STARK Technologies</a>
+              
+    
+      <!-- Navigation Links -->
+      
+    </div>
+  </header>
+
+
+
     <main class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
         <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Create New Product</h1>
-        <form action="/product/proinfo" method="post" enctype="multipart/form-data" class="space-y-4">
+        <form action="/admin/proinfo" method="post" enctype="multipart/form-data" class="space-y-4">
             <input type="file" name="image" class="w-full p-2 border border-gray-300 rounded-lg">
             
             <input type="text" placeholder="Product" name="name" required 

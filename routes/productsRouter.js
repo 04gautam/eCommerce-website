@@ -36,7 +36,7 @@ router.post("/proinfo", upload.single("image"), async (req, res)=>{
 
 
 
-router.get("/ecom", cookieProtect,(req, res)=>{
+router.get("/stark", cookieProtect,(req, res)=>{
   try {
     res.render("admin-panel.ejs")
     

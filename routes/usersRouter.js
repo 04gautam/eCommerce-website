@@ -38,7 +38,7 @@ await createUser.save()
 router.post("/login", protect,(req, res)=>{
   try{
 
-    const {email} = req.userData
+    const {email} = req.userData;
 
     // res.cookie("token", "hello")
     let token = jwt.sign(email, process.env.JWT_KEY);
