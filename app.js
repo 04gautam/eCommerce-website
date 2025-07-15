@@ -16,8 +16,8 @@ const multer = require("multer")
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, "public")))
 app.set("view engine", "ejs")
+app.use(express.static(path.join(__dirname, "public")))
   // Set up session middleware
   app.use(session({
     secret: 'secret_key', // replace with your own secret

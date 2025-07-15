@@ -264,14 +264,18 @@ transporter.sendMail(mailOptions, (error, info) => {
   console.log("Email sent:", info.response);
 });
 
-
 res.redirect("/purchased")
-
-
 
 })
 
-router.get("/purchased", (req, res)=>{
+router.get("/purchased", async(req, res)=>{
+
+  
+// const user = jwt.verify(req.cookies.token, process.env.JWT_KEY)
+//   let userOrders = await productModel.findOne({email:user})
+//   console.log(userOrders)
+
+
   res.render("purchaseMsg.ejs")
 })
 
@@ -281,7 +285,6 @@ router.get("/email/:em", cookieProtect, async(req, res)=>{
 
   res.render("email-both-end.ejs", {shipItem})
 })
-
 
 
 router.get("/user/account",cookieProtect, async(req, res)=>{
